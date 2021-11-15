@@ -1,4 +1,4 @@
-package lesson14.drivers;
+package drivers;
 
 import capabilities.MobileCapabilityTypeEx;
 import io.appium.java_client.MobileElement;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AndroidDriverFactory {
 
-    private final Long implicitlyWaitTime = 30L;
+    private Long implicitlyWaitTime = 30L;
 
     private URL url;
 
@@ -31,6 +31,14 @@ public class AndroidDriverFactory {
     public AndroidDriverFactory(URL url) {
         this.url = url;
         desiredCapabilities = new DesiredCapabilities();
+    }
+
+    public Long getImplicitlyWaitTime() {
+        return implicitlyWaitTime;
+    }
+
+    public void setImplicitlyWaitTime(Long implicitlyWaitTime) {
+        this.implicitlyWaitTime = implicitlyWaitTime;
     }
 
     public URL getUrl() {
