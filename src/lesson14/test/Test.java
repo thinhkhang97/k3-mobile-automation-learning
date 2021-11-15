@@ -2,8 +2,8 @@ package lesson14.test;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import lesson14.drivers.AndroidDriverFactory;
-import lesson14.server.AppiumServer;
+import drivers.AndroidDriverFactory;
+import server.AppiumServer;
 
 public class Test {
     public static void main(String[] args) {
