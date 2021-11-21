@@ -17,8 +17,8 @@ public class Test {
             MobileElement loginBtn = driver.findElementByAccessibilityId("Login");
             loginBtn.click();
 
-            MobileElement inputEmailElem = driver.findElementByXPath("//android.widget.EditText[@content-desc=\"input-email\"]\n");
-            MobileElement inputPasswordElem = driver.findElementByXPath("//android.widget.EditText[@content-desc=\"input-password\"]\n");
+            MobileElement inputEmailElem = driver.findElementByXPath("//android.widget.EditText[@content-desc=\"input-email\"]");
+            MobileElement inputPasswordElem = driver.findElementByXPath("//android.widget.EditText[@content-desc=\"input-password\"]");
 
             inputEmailElem.sendKeys("thinkhang97@gmail.com");
             inputPasswordElem.sendKeys("123454555");
