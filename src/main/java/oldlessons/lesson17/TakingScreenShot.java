@@ -1,4 +1,4 @@
-package lesson17;
+package oldlessons.lesson17;
 
 import drivers.AndroidDriverFactory;
 import io.appium.java_client.AppiumDriver;
@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import server.AppiumServer;
 
 import java.io.File;
-import java.time.Duration;
 
 public class TakingScreenShot {
     public static void main(String[] args) {

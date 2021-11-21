@@ -1,12 +1,8 @@
-package lesson17;
+package oldlessons.lesson17;
 
 import drivers.AndroidDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.Dimension;
 import server.AppiumServer;
 
 import java.time.Duration;

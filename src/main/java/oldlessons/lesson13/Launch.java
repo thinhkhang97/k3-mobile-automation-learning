@@ -1,4 +1,4 @@
-package lesson13;
+package oldlessons.lesson13;
 
 import capabilities.MobileCapabilityTypeEx;
 import io.appium.java_client.AppiumDriver;
@@ -8,7 +8,6 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class Launch {

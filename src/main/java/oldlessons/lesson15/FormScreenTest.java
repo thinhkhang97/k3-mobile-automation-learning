@@ -1,4 +1,4 @@
-package lesson15;
+package oldlessons.lesson15;
 
 import drivers.AndroidDriverFactory;
 import io.appium.java_client.AppiumDriver;
