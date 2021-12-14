@@ -11,6 +11,8 @@ public class LoginPage {
     private final By inputEmailSel = MobileBy.AccessibilityId("input-email");
     private final By inputPasswordSel = MobileBy.AccessibilityId("input-password");
     private final By loginBtnSel = MobileBy.AccessibilityId("button-LOGIN");
+    private Alert alert;
+
     private BottomNavigationBar bottomNavigationBar;
 
     public LoginPage(AppiumDriver driver) {
@@ -30,10 +32,35 @@ public class LoginPage {
     }
 
     public BottomNavigationBar bottomNavigationBar() {
-        if(this.bottomNavigationBar == null) {
+        if (this.bottomNavigationBar == null) {
             this.bottomNavigationBar = new BottomNavigationBar(this.driver);
         }
 
         return this.bottomNavigationBar;
+    }
+
+    public Alert alert() {
+        if(alert == null) {
+            this.alert = new Alert(this.driver);
+        }
+        return this.alert;
+    }
+
+    public static class Alert {
+        private final AppiumDriver<MobileElement> driver;
+        private final By titleSel = MobileBy.id("android:id/alertTitle");
+        private final By okButtonSel = MobileBy.id("android:id/button1");
+
+        public Alert(AppiumDriver driver) {
+            this.driver = driver;
+        }
+
+        public MobileElement title() {
+            return this.driver.findElement(titleSel);
+        }
+
+        public MobileElement okButton() {
+            return this.driver.findElement(okButtonSel);
+        }
     }
 }

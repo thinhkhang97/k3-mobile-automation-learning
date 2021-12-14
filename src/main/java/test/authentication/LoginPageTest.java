@@ -5,10 +5,14 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import models.components.BottomNavigationBar;
 import models.pages.LoginPage;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 import server.AppiumServer;
 
 public class LoginPageTest {
-    public static void main(String[] args) {
+
+    @Test
+    public void loginWithCorrectCred() {
         AppiumServer appiumServer = new AppiumServer("127.0.0.1", 8081);
         appiumServer.start();
 
@@ -25,11 +29,15 @@ public class LoginPageTest {
            loginPage.inputEmail().sendKeys("thinhkhang123@gmail.com");
            loginPage.inputPassword().sendKeys("abcas234");
            loginPage.loginBtnSel().click();
+
+           String alertTitle = loginPage.alert().title().getText();
+           Assert.assertTrue(alertTitle.equals("Success"), "[ERR]: Login failed");
+           loginPage.alert().okButton().click();
+
        } catch (Exception e) {
            e.printStackTrace();
        } finally {
            appiumServer.stop();
        }
-
     }
 }
