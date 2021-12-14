@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Regresson" verbose="1" >
+    <test name="Authentication" >
+        <classes>
+            <class name="test.authentication.LoginPageTest" />
+        </classes>
+    </test>
+</suite>
