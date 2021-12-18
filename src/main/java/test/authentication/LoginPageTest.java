@@ -6,13 +6,16 @@ import io.appium.java_client.MobileElement;
 import models.components.BottomNavigationBar;
 import models.pages.LoginPage;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import server.AppiumServer;
+import test_data.authentication.DataObjectBuilder;
+import test_data.authentication.LoginCred;
 
 public class LoginPageTest {
 
-    @Test
-    public void loginWithCorrectCred() {
+    @Test(dataProvider = "loginCredData")
+    public void loginWithCorrectCred(LoginCred loginCred) {
         AppiumServer appiumServer = new AppiumServer("127.0.0.1", 8081);
         appiumServer.start();
 
@@ -26,8 +29,8 @@ public class LoginPageTest {
 
            bottomNavigationBar.login().click();
 
-           loginPage.inputEmail().sendKeys("thinhkhang123@gmail.com");
-           loginPage.inputPassword().sendKeys("abcas234");
+           loginPage.inputEmail().sendKeys(loginCred.getEmail());
+           loginPage.inputPassword().sendKeys(loginCred.getPassword());
            loginPage.loginBtnSel().click();
 
            String alertTitle = loginPage.alert().title().getText();
@@ -39,5 +42,10 @@ public class LoginPageTest {
        } finally {
            appiumServer.stop();
        }
+    }
+
+    @DataProvider
+    public LoginCred[] loginCredData() {
+        return DataObjectBuilder.buildLoginCreds("/src/main/resources/test-data/login-credential.json");
     }
 }
