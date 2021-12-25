@@ -29,6 +29,6 @@ public class DataObjectBuilder {
     }
 
     public static void main(String[] args) {
-        buildLoginCreds("/src/main/resources/test-data/login-credential.json");
+        buildLoginCreds("/src/main/resources/test-data/valid-login-credential.json");
     }
 }

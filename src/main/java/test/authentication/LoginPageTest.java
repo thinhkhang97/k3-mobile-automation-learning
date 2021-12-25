@@ -31,7 +31,7 @@ public class LoginPageTest {
 
            loginPage.inputEmail().sendKeys(loginCred.getEmail());
            loginPage.inputPassword().sendKeys(loginCred.getPassword());
-           loginPage.loginBtnSel().click();
+           loginPage.loginBtn().click();
 
            String alertTitle = loginPage.alert().title().getText();
            Assert.assertTrue(alertTitle.equals("Success"), "[ERR]: Login failed");
@@ -46,6 +46,6 @@ public class LoginPageTest {
 
     @DataProvider
     public LoginCred[] loginCredData() {
-        return DataObjectBuilder.buildLoginCreds("/src/main/resources/test-data/login-credential.json");
+        return DataObjectBuilder.buildLoginCreds("/src/main/resources/test-data/valid-login-credential.json");
     }
 }

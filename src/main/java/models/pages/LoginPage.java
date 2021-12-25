@@ -3,6 +3,7 @@ package models.pages;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.qameta.allure.Step;
 import models.components.BottomNavigationBar;
 import org.openqa.selenium.By;
 
@@ -27,8 +28,25 @@ public class LoginPage {
         return this.driver.findElement(inputPasswordSel);
     }
 
-    public MobileElement loginBtnSel() {
+    public MobileElement loginBtn() {
         return this.driver.findElement(loginBtnSel);
+    }
+
+    @Step("Input email: {email}")
+    public LoginPage inputEmail(String email) {
+        this.inputEmail().sendKeys(email);
+        return this;
+    }
+
+    @Step("Input password: {password}")
+    public LoginPage inputPassword(String password) {
+        this.inputPassword().sendKeys(password);
+        return this;
+    }
+    @Step("Login button")
+    public LoginPage clickLoginButton() {
+        this.loginBtn().click();
+        return this;
     }
 
     public BottomNavigationBar bottomNavigationBar() {
