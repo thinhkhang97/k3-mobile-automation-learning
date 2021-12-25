@@ -3,7 +3,7 @@
 <suite name="Regresson" verbose="1" >
     <test name="Authentication" >
         <classes>
-            <class name="test.authentication.LoginPageTest" />
+            <class name="test.authentication.LoginPageTestEx" />
         </classes>
     </test>
 </suite>
