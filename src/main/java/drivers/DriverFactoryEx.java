@@ -7,6 +7,7 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import server.AppiumServer;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
@@ -104,6 +105,24 @@ public class DriverFactoryEx {
         driver.manage().timeouts().implicitlyWait(this.implicitlyWaitTime, TimeUnit.SECONDS);
     }
 
+    private void init(String udid, String port, String systemPort){
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.PLATFORM_NAME, this.platformName);
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.UDID, udid);
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.APP_SYSTEM_PORT, systemPort);
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.AUTOMATION_NAME, this.automationName);
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.APP_PACKAGE, this.appPackage);
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.APP_ACTIVITY, this.appActivity);
+        desiredCapabilities.setCapability(MobileCapabilityTypeEx.NEW_COMMAND_TIMEOUT, 120);
+
+        try {
+            driver = new AndroidDriver<MobileElement>(new URL("http://192.168.1.10:4444/wd/hub"), desiredCapabilities);
+            driver.manage().timeouts().implicitlyWait(this.implicitlyWaitTime, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public AndroidDriver<MobileElement> getDriver() {
         if (driver == null) {
             init();
@@ -111,11 +130,23 @@ public class DriverFactoryEx {
         return driver;
     }
 
+    public AndroidDriver<MobileElement> getDriver(String udid, String port, String systemPort) {
+        if (driver == null) {
+            init(udid, port, systemPort);
+        }
+        return driver;
+    }
+
     public void quitSession() {
-        if(driver!=null) {
+        if (driver != null) {
             driver.quit();
             driver = null;
-            appiumServer.stop();
+        }
+    }
+
+    public void stopServer() {
+        if (this.appiumServer != null) {
+            this.appiumServer.stop();
         }
     }
 }

@@ -33,7 +33,7 @@ public class LoginPageTestEx extends BaseTest {
     public void loginWithInCorrectCred(LoginCred loginCred) {
         AppiumDriver<MobileElement> driver = getDriver();
         LoginFlow loginFlow = new LoginFlow(driver);
-        loginFlow.navigateToLoginForm().login(loginCred).verifyLoginFail();
+         loginFlow.navigateToLoginForm().login(loginCred).verifyLoginFail();
     }
 
 

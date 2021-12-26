@@ -1,7 +1,18 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Regresson" verbose="1" >
-    <test name="Authentication" >
+<suite name="Regresson" parallel="tests" thread-count="4" >
+    <test name="authentication | R58R4421BRB" >
+        <parameter name="udid" value="R58R4421BRB"/>
+        <parameter name="port" value="7000"/>
+        <parameter name="systemPort" value="8300"/>
+        <classes>
+            <class name="test.authentication.LoginPageTestEx" />
+        </classes>
+    </test>
+    <test name="authentication | emulator-5554" >
+        <parameter name="udid" value="emulator-5554"/>
+        <parameter name="port" value="8000"/>
+        <parameter name="systemPort" value="8301"/>
         <classes>
             <class name="test.authentication.LoginPageTestEx" />
         </classes>
