@@ -7,9 +7,7 @@ import io.qameta.allure.Allure;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.io.File;
 import java.io.InputStream;
@@ -21,9 +19,17 @@ import java.util.*;
 public class BaseTest {
     private final static List<DriverFactoryEx> driverThreadPool = Collections.synchronizedList(new ArrayList<>());
     private static ThreadLocal<DriverFactoryEx> driverThread;
+    private String udid;
+    private String port;
+    private String systemPort;
 
-    @BeforeSuite(alwaysRun = true)
-    public static void beforeSuite() {
+
+    @BeforeTest(alwaysRun = true)
+    @Parameters({"udid", "port", "systemPort"})
+    public void beforeTest(String udid, String port, String systemPort) {
+        this.udid = udid;
+        this.port = port;
+        this.systemPort = systemPort;
         // Init a new thread before run test suite to avoid socket hang up
         driverThread = ThreadLocal.withInitial(() -> {
             DriverFactoryEx newDriverThread = new DriverFactoryEx();
@@ -32,15 +38,16 @@ public class BaseTest {
         });
     }
 
-    @AfterSuite(alwaysRun = true)
-    public static void afterSuite() {
+    @AfterTest(alwaysRun = true)
+    public void afterTest() {
         for (DriverFactoryEx _driverThread : driverThreadPool) {
             _driverThread.quitSession();
         }
     }
 
+
     @AfterMethod(alwaysRun = true)
-    public static void afterMethod(ITestResult result) {
+    public void afterMethod(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             String testMethodName = result.getName();
 
@@ -68,7 +75,7 @@ public class BaseTest {
         }
     }
 
-    public static AppiumDriver<MobileElement> getDriver() {
-        return driverThread.get().getDriver();
+    public AppiumDriver<MobileElement> getDriver() {
+        return driverThread.get().getDriver(this.udid, this.port, this.systemPort);
     }
 }
